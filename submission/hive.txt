@@ -1,0 +1,7 @@
+create external table ipl_external
+(id int, inning int, over_playing int, ball int, batsman string, non_striker string, bowler string, batsman_runs int, extra_runs int, total_runs int, non_boundary int, is_wicket int, dismissal_kind string, player_dismissed string, fielder string, extras_type string, batting_team string, bowling_team string) row format delimited fields terminated by ',' LOCATION '/ipl/';
+
+
+select batting_team, sum(total_runs) as team_total_runs from ipl_external group by batting_team order by team_total_runs desc limit 10; 
+
+select id, inning, sum(total_runs)/20 as average_runs from ipl_external group by id, inning order by id, inning;
